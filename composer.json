@@ -10,7 +10,6 @@
   ],
   "require": {
     "spryker/money": "^1.0 || ^2.0",
-    "spryker/currency": "^3.2.0",
     "fond-of-spryker/enhanced-ecommerce-extension": "dev-main",
     "php": ">=7.2"
   },
