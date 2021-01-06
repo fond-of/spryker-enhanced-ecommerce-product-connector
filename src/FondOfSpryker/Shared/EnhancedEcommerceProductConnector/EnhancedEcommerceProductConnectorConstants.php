@@ -2,7 +2,7 @@
 
 namespace FondOfSpryker\Shared\EnhancedEcommerceProductConnector;
 
-interface EnhancedEcommerceProductConnectorInterface
+interface EnhancedEcommerceProductConnectorConstants
 {
     public const PAGE_TYPE = 'productDetail';
 

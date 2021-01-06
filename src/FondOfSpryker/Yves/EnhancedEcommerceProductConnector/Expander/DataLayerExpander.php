@@ -8,7 +8,7 @@ use Generated\Shared\Transfer\EnhancedEcommerceProductTransfer;
 use Generated\Shared\Transfer\EnhancedEcommerceTransfer;
 use Generated\Shared\Transfer\ProductViewTransfer;
 use Spryker\Shared\Money\Dependency\Plugin\MoneyPluginInterface;
-use FondOfSpryker\Shared\EnhancedEcommerceProductConnector\EnhancedEcommerceProductConnectorInterface as ModuleConstants;
+use FondOfSpryker\Shared\EnhancedEcommerceProductConnector\EnhancedEcommerceProductConnectorConstants as ModuleConstants;
 
 class DataLayerExpander implements DataLayerExpanderInterface
 {
@@ -175,6 +175,11 @@ class DataLayerExpander implements DataLayerExpanderInterface
         return '';
     }
 
+    /**
+     * @param array $haystack
+     *
+     * @return array
+     */
     protected function removeEmptyArrayIndex(array $haystack): array
     {
         foreach ($haystack as $key => $value) {

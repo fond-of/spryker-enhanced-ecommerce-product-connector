@@ -2,7 +2,7 @@
 
 namespace FondOfSpryker\Yves\EnhancedEcommerceProductConnector\Plugin\DataLayer;
 
-use FondOfSpryker\Shared\EnhancedEcommerceProductConnector\EnhancedEcommerceProductConnectorInterface;
+use FondOfSpryker\Shared\EnhancedEcommerceProductConnector\EnhancedEcommerceProductConnectorConstants;
 use FondOfSpryker\Yves\EnhancedEcommerceExtension\Dependency\EnhancedEcommerceDataLayerExpanderPluginInterface;
 use Generated\Shared\Transfer\ProductViewTransfer;
 use Spryker\Yves\Kernel\AbstractPlugin;
@@ -20,9 +20,9 @@ class ProductDetailExpanderPlugin extends AbstractPlugin implements EnhancedEcom
      */
     public function isApplicable(string $pageType, array $twigVariableBag = []): bool
     {
-        return $pageType === EnhancedEcommerceProductConnectorInterface::PAGE_TYPE
-            && isset($twigVariableBag[EnhancedEcommerceProductConnectorInterface::PARAM_PRODUCT])
-            && $twigVariableBag[EnhancedEcommerceProductConnectorInterface::PARAM_PRODUCT] instanceof ProductViewTransfer;
+        return $pageType === EnhancedEcommerceProductConnectorConstants::PAGE_TYPE
+            && isset($twigVariableBag[EnhancedEcommerceProductConnectorConstants::PARAM_PRODUCT])
+            && $twigVariableBag[EnhancedEcommerceProductConnectorConstants::PARAM_PRODUCT] instanceof ProductViewTransfer;
     }
 
     /**
