@@ -2,6 +2,7 @@
 
 namespace FondOfSpryker\Yves\EnhancedEcommerceProductConnector\Expander;
 
+use FondOfSpryker\Yves\EnhancedEcommerceExtension\Dependency\EnhancedEcommerceDataLayerExpanderInterface;
 use FondOfSpryker\Yves\EnhancedEcommerceProductConnector\EnhancedEcommerceProductConnectorConfig;
 use Generated\Shared\Transfer\EnhancedEcommerceDetailTransfer;
 use Generated\Shared\Transfer\EnhancedEcommerceProductTransfer;
@@ -10,7 +11,7 @@ use Generated\Shared\Transfer\ProductViewTransfer;
 use Spryker\Shared\Money\Dependency\Plugin\MoneyPluginInterface;
 use FondOfSpryker\Shared\EnhancedEcommerceProductConnector\EnhancedEcommerceProductConnectorConstants as ModuleConstants;
 
-class DataLayerExpander implements DataLayerExpanderInterface
+class ProductDataLayerExpander implements EnhancedEcommerceDataLayerExpanderInterface
 {
     /**
      * @var MoneyPluginInterface
