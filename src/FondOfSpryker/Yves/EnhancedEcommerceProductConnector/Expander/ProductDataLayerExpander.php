@@ -79,7 +79,7 @@ class ProductDataLayerExpander implements EnhancedEcommerceDataLayerExpanderInte
             ->setVariant($this->getProductAttrStyle($productViewTransfer))
             ->setBrand($this->getBrand($productViewTransfer))
             ->setDimension10($this->getSize($productViewTransfer))
-            ->setPrice($this->moneyPlugin->convertIntegerToDecimal($productViewTransfer->getPrice()));
+            ->setPrice(''.$this->moneyPlugin->convertIntegerToDecimal($productViewTransfer->getPrice()).'');
 
         return $enhancedEcommerceProductTranfer;
     }

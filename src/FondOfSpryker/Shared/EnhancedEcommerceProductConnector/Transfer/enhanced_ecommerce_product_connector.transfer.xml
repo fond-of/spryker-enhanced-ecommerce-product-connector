@@ -23,6 +23,7 @@
         <property name="brand" type="string"/>
         <property name="dimension10" type="string"/>
         <property name="float" type="string"/>
+        <property name="price" type="string"/>
     </transfer>
 
     <transfer name="ProductView">
