@@ -11,9 +11,9 @@ class EnhancedEcommerceProductConnectorDependencyProvider extends AbstractBundle
     public const PLUGIN_MONEY = 'PLUGIN_MONEY';
 
     /**
-     * @param Container $container
+     * @param \Spryker\Yves\Kernel\Container $container
      *
-     * @return Container
+     * @return \Spryker\Yves\Kernel\Container
      */
     public function provideDependencies(Container $container): Container
     {

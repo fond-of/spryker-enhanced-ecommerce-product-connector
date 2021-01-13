@@ -1,10 +1,9 @@
 <?php
 
-
 namespace FondOfSpryker\Yves\EnhancedEcommerceProductConnector;
 
-use Spryker\Yves\Kernel\AbstractBundleConfig;
 use FondOfSpryker\Shared\EnhancedEcommerceProductConnector\EnhancedEcommerceProductConnectorConstants;
+use Spryker\Yves\Kernel\AbstractBundleConfig;
 
 class EnhancedEcommerceProductConnectorConfig extends AbstractBundleConfig
 {
@@ -16,7 +15,7 @@ class EnhancedEcommerceProductConnectorConfig extends AbstractBundleConfig
     public function getDontUnsetArrayIndex(): array
     {
         return $this->get(EnhancedEcommerceProductConnectorConstants::CONFIG_DONT_UNSET_ARRAY_INDEX, [
-            'action_field'
+            'action_field',
         ]);
     }
 }

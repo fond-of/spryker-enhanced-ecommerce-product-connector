@@ -6,7 +6,6 @@ use FondOfSpryker\Shared\EnhancedEcommerceProductConnector\EnhancedEcommerceProd
 use FondOfSpryker\Yves\EnhancedEcommerceExtension\Dependency\EnhancedEcommerceDataLayerExpanderPluginInterface;
 use Generated\Shared\Transfer\ProductViewTransfer;
 use Spryker\Yves\Kernel\AbstractPlugin;
-use Twig\Environment;
 
 /**
  * @method \FondOfSpryker\Yves\EnhancedEcommerceProductConnector\EnhancedEcommerceProductConnectorFactory getFactory()
@@ -36,7 +35,7 @@ class ProductDetailExpanderPlugin extends AbstractPlugin implements EnhancedEcom
     public function expand(string $page, array $twigVariableBag, array $dataLayer): array
     {
         return $this->getFactory()
-            ->createDataLayerExpander()
+            ->createProductDataLayerExpander()
             ->expand($page, $twigVariableBag, $dataLayer);
     }
 }

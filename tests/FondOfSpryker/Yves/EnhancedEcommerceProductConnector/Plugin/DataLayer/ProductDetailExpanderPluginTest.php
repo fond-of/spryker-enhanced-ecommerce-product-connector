@@ -3,8 +3,10 @@
 namespace FondOfSpryker\Yves\EnhancedEcommerceProductConnector\Plugin\DataLayer;
 
 use Codeception\Test\Unit;
+use FondOfSpryker\Shared\EnhancedEcommerceProductConnector\EnhancedEcommerceProductConnectorConstants;
+use FondOfSpryker\Yves\EnhancedEcommerceExtension\Dependency\EnhancedEcommerceDataLayerExpanderInterface;
 use FondOfSpryker\Yves\EnhancedEcommerceProductConnector\EnhancedEcommerceProductConnectorFactory;
-use FondOfSpryker\Yves\GoogleTagManagerProductConnector\Expander\DataLayerExpanderInterface;
+use Generated\Shared\Transfer\ProductViewTransfer;
 
 class ProductDetailExpanderPluginTest extends Unit
 {
@@ -14,7 +16,7 @@ class ProductDetailExpanderPluginTest extends Unit
     protected $factoryMock;
 
     /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfSpryker\Yves\EnhancedEcommerceProductConnector\Expander\DataLayerExpanderInterface
+     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfSpryker\Yves\EnhancedEcommerceExtension\Dependency\EnhancedEcommerceDataLayerExpanderInterface
      */
     protected $expanderMock;
 
@@ -29,6 +31,11 @@ class ProductDetailExpanderPluginTest extends Unit
     protected $twigVariableBag;
 
     /**
+     * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\ProductViewTransfer
+     */
+    protected $productViewTransferMock;
+
+    /**
      * @return void
      */
     protected function _before(): void
@@ -37,7 +44,11 @@ class ProductDetailExpanderPluginTest extends Unit
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->expanderMock = $this->getMockBuilder(DataLayerExpanderInterface::class)
+        $this->expanderMock = $this->getMockBuilder(EnhancedEcommerceDataLayerExpanderInterface::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $this->productViewTransferMock = $this->getMockBuilder(ProductViewTransfer::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -52,6 +63,27 @@ class ProductDetailExpanderPluginTest extends Unit
      */
     public function testIsApplicable(): void
     {
-        $this->assertEquals(true, $this->plugin->isApplicable('pageType', $this->twigVariableBag));
+        $this->assertEquals(true, $this->plugin->isApplicable(EnhancedEcommerceProductConnectorConstants::PAGE_TYPE, [
+            EnhancedEcommerceProductConnectorConstants::PARAM_PRODUCT => $this->productViewTransferMock,
+        ]));
+    }
+
+    /**
+     * @return void
+     */
+    public function testExpand()
+    {
+        $this->factoryMock->expects($this->atLeastOnce())
+            ->method('createProductDataLayerExpander')
+            ->willReturn($this->expanderMock);
+
+        $this->expanderMock->expects($this->atLeastOnce())
+            ->method('expand');
+
+        $this->plugin->expand(
+            EnhancedEcommerceProductConnectorConstants::PAGE_TYPE,
+            $this->twigVariableBag,
+            []
+        );
     }
 }

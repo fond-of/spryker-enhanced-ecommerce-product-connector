@@ -2,6 +2,7 @@
 
 namespace FondOfSpryker\Yves\EnhancedEcommerceProductConnector\Expander;
 
+use FondOfSpryker\Shared\EnhancedEcommerceProductConnector\EnhancedEcommerceProductConnectorConstants as ModuleConstants;
 use FondOfSpryker\Yves\EnhancedEcommerceExtension\Dependency\EnhancedEcommerceDataLayerExpanderInterface;
 use FondOfSpryker\Yves\EnhancedEcommerceProductConnector\EnhancedEcommerceProductConnectorConfig;
 use Generated\Shared\Transfer\EnhancedEcommerceDetailTransfer;
@@ -9,29 +10,27 @@ use Generated\Shared\Transfer\EnhancedEcommerceProductTransfer;
 use Generated\Shared\Transfer\EnhancedEcommerceTransfer;
 use Generated\Shared\Transfer\ProductViewTransfer;
 use Spryker\Shared\Money\Dependency\Plugin\MoneyPluginInterface;
-use FondOfSpryker\Shared\EnhancedEcommerceProductConnector\EnhancedEcommerceProductConnectorConstants as ModuleConstants;
 
 class ProductDataLayerExpander implements EnhancedEcommerceDataLayerExpanderInterface
 {
     /**
-     * @var MoneyPluginInterface
+     * @var \Spryker\Shared\Money\Dependency\Plugin\MoneyPluginInterface
      */
     protected $moneyPlugin;
 
     /**
-     * @var EnhancedEcommerceProductConnectorConfig
+     * @var \FondOfSpryker\Yves\EnhancedEcommerceProductConnector\EnhancedEcommerceProductConnectorConfig
      */
     protected $config;
 
     /**
-     * @param MoneyPluginInterface $moneyPlugin
-     * @param EnhancedEcommerceProductConnectorConfig $config
+     * @param \Spryker\Shared\Money\Dependency\Plugin\MoneyPluginInterface $moneyPlugin
+     * @param \FondOfSpryker\Yves\EnhancedEcommerceProductConnector\EnhancedEcommerceProductConnectorConfig $config
      */
     public function __construct(
         MoneyPluginInterface $moneyPlugin,
         EnhancedEcommerceProductConnectorConfig $config
-    )
-    {
+    ) {
         $this->moneyPlugin = $moneyPlugin;
         $this->config = $config;
     }
@@ -67,9 +66,9 @@ class ProductDataLayerExpander implements EnhancedEcommerceDataLayerExpanderInte
     }
 
     /**
-     * @param ProductViewTransfer $productViewTransfer
+     * @param \Generated\Shared\Transfer\ProductViewTransfer $productViewTransfer
      *
-     * @return ProductViewTransfer
+     * @return \Generated\Shared\Transfer\ProductViewTransfer
      */
     protected function getProduct(ProductViewTransfer $productViewTransfer): EnhancedEcommerceProductTransfer
     {
@@ -79,7 +78,7 @@ class ProductDataLayerExpander implements EnhancedEcommerceDataLayerExpanderInte
             ->setVariant($this->getProductAttrStyle($productViewTransfer))
             ->setBrand($this->getBrand($productViewTransfer))
             ->setDimension10($this->getSize($productViewTransfer))
-            ->setPrice(''.$this->moneyPlugin->convertIntegerToDecimal($productViewTransfer->getPrice()).'');
+            ->setPrice('' . $this->moneyPlugin->convertIntegerToDecimal($productViewTransfer->getPrice()) . '');
 
         return $enhancedEcommerceProductTranfer;
     }
@@ -93,8 +92,8 @@ class ProductDataLayerExpander implements EnhancedEcommerceDataLayerExpanderInte
     {
         $productAttributes = $productViewTransfer->getAttributes();
 
-        if (count($productAttributes) === 0) {
-            return $productViewTransfer->getName();
+        if (!$productAttributes || count($productAttributes) === 0) {
+            return '';
         }
 
         if (isset($productAttributes[ModuleConstants::PARAM_PRODUCT_ATTR_MODEL_UNTRANSLATED])) {
@@ -109,7 +108,7 @@ class ProductDataLayerExpander implements EnhancedEcommerceDataLayerExpanderInte
     }
 
     /**
-     * @param ProductViewTransfer $productViewTransfer
+     * @param \Generated\Shared\Transfer\ProductViewTransfer $productViewTransfer
      *
      * @return string
      */
@@ -117,7 +116,7 @@ class ProductDataLayerExpander implements EnhancedEcommerceDataLayerExpanderInte
     {
         $productAttributes = $productViewTransfer->getAttributes();
 
-        if (count($productAttributes) === 0) {
+        if (!$productAttributes || count($productAttributes) === 0) {
             return '';
         }
 
@@ -133,7 +132,7 @@ class ProductDataLayerExpander implements EnhancedEcommerceDataLayerExpanderInte
     }
 
     /**
-     * @param ProductViewTransfer $productViewTransfer
+     * @param \Generated\Shared\Transfer\ProductViewTransfer $productViewTransfer
      *
      * @return string
      */
@@ -141,7 +140,7 @@ class ProductDataLayerExpander implements EnhancedEcommerceDataLayerExpanderInte
     {
         $productAttributes = $productViewTransfer->getAttributes();
 
-        if (count($productAttributes) === 0) {
+        if (!$productAttributes || count($productAttributes) === 0) {
             return '';
         }
 
@@ -153,7 +152,7 @@ class ProductDataLayerExpander implements EnhancedEcommerceDataLayerExpanderInte
     }
 
     /**
-     * @param ProductViewTransfer $productViewTransfer
+     * @param \Generated\Shared\Transfer\ProductViewTransfer $productViewTransfer
      *
      * @return string
      */
@@ -161,7 +160,7 @@ class ProductDataLayerExpander implements EnhancedEcommerceDataLayerExpanderInte
     {
         $productAttributes = $productViewTransfer->getAttributes();
 
-        if (count($productAttributes) === 0) {
+        if (!$productAttributes || count($productAttributes) === 0) {
             return '';
         }
 
