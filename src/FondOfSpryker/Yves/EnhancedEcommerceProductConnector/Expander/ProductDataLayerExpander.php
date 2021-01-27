@@ -49,9 +49,9 @@ class ProductDataLayerExpander implements EnhancedEcommerceDataLayerExpanderInte
             ->setEventCategory(ModuleConstants::EVENT_CATEGORY)
             ->setEventAction($page)
             ->setEventLabel($twigVariableBag[ModuleConstants::PARAM_PRODUCT]->getSku())
-            ->setEcommerce(['detail' => $this->addDetail($twigVariableBag)->toArray()]);
+            ->setEcommerce(['detail' => $this->addDetail($twigVariableBag)->toArray(true, true)]);
 
-        return $this->removeEmptyArrayIndex($enhancedEcommerceTransfer->toArray());
+        return $this->removeEmptyArrayIndex($enhancedEcommerceTransfer->toArray(true, true));
     }
 
     /**
