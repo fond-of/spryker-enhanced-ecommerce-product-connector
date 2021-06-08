@@ -63,7 +63,7 @@ class ProductDetailExpanderPluginTest extends Unit
      */
     public function testIsApplicable(): void
     {
-        $this->assertEquals(true, $this->plugin->isApplicable(EnhancedEcommerceProductConnectorConstants::PAGE_TYPE, [
+        static::assertEquals(true, $this->plugin->isApplicable(EnhancedEcommerceProductConnectorConstants::PAGE_TYPE, [
             EnhancedEcommerceProductConnectorConstants::PARAM_PRODUCT => $this->productViewTransferMock,
         ]));
     }
@@ -73,11 +73,11 @@ class ProductDetailExpanderPluginTest extends Unit
      */
     public function testExpand()
     {
-        $this->factoryMock->expects($this->atLeastOnce())
+        $this->factoryMock->expects(static::atLeastOnce())
             ->method('createProductDataLayerExpander')
             ->willReturn($this->expanderMock);
 
-        $this->expanderMock->expects($this->atLeastOnce())
+        $this->expanderMock->expects(static::atLeastOnce())
             ->method('expand');
 
         $this->plugin->expand(

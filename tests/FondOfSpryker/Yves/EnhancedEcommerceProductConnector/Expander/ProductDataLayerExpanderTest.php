@@ -22,6 +22,11 @@ class ProductDataLayerExpanderTest extends Unit
     protected $configMock;
 
     /**
+     * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Yves\Kernel\Container;
+     */
+    protected $containerMock;
+
+    /**
      * @var \FondOfSpryker\Yves\EnhancedEcommerceExtension\Dependency\EnhancedEcommerceDataLayerExpanderInterface
      */
     protected $expander;
@@ -60,7 +65,13 @@ class ProductDataLayerExpanderTest extends Unit
      */
     public function testExpand(): void
     {
-        $twigVariableBag = include codecept_data_dir('twigVariableBag.php');
+        $this->productViewTransferMock->expects(static::atLeastOnce())
+            ->method('getAttributes')
+            ->willReturn(['foo' => 'bar']);
+
+        $this->productViewTransferMock->expects(static::atLeastOnce())
+            ->method('getName')
+            ->willReturn('product name');
 
         $this->expander->expand('pageType', [
             EnhancedEcommerceProductConnectorConstants::PARAM_PRODUCT => $this->productViewTransferMock,

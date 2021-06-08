@@ -68,7 +68,7 @@ class ProductDataLayerExpander implements EnhancedEcommerceDataLayerExpanderInte
     /**
      * @param \Generated\Shared\Transfer\ProductViewTransfer $productViewTransfer
      *
-     * @return \Generated\Shared\Transfer\ProductViewTransfer
+     * @return \Generated\Shared\Transfer\EnhancedEcommerceProductTransfer
      */
     protected function getProduct(ProductViewTransfer $productViewTransfer): EnhancedEcommerceProductTransfer
     {
@@ -84,7 +84,7 @@ class ProductDataLayerExpander implements EnhancedEcommerceDataLayerExpanderInte
     }
 
     /**
-     * @param array $product
+     * @param \Generated\Shared\Transfer\ProductViewTransfer $productViewTransfer
      *
      * @return string
      */
@@ -92,7 +92,7 @@ class ProductDataLayerExpander implements EnhancedEcommerceDataLayerExpanderInte
     {
         $productAttributes = $productViewTransfer->getAttributes();
 
-        if (!$productAttributes || count($productAttributes) === 0) {
+        if (count($productAttributes) < 1) {
             return '';
         }
 
@@ -116,7 +116,7 @@ class ProductDataLayerExpander implements EnhancedEcommerceDataLayerExpanderInte
     {
         $productAttributes = $productViewTransfer->getAttributes();
 
-        if (!$productAttributes || count($productAttributes) === 0) {
+        if (count($productAttributes) < 1) {
             return '';
         }
 
@@ -140,7 +140,7 @@ class ProductDataLayerExpander implements EnhancedEcommerceDataLayerExpanderInte
     {
         $productAttributes = $productViewTransfer->getAttributes();
 
-        if (!$productAttributes || count($productAttributes) === 0) {
+        if (count($productAttributes) < 1) {
             return '';
         }
 
@@ -160,7 +160,7 @@ class ProductDataLayerExpander implements EnhancedEcommerceDataLayerExpanderInte
     {
         $productAttributes = $productViewTransfer->getAttributes();
 
-        if (!$productAttributes || count($productAttributes) === 0) {
+        if (count($productAttributes) < 1) {
             return '';
         }
 
