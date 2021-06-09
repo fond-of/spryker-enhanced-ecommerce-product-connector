@@ -56,15 +56,15 @@ class EnhancedEcommerceProductConnectorFactoryTest extends Unit
      */
     public function testCreateDataLayerExpander(): void
     {
-        $this->containerMock->expects($this->atLeastOnce())
+        $this->containerMock->expects(static::atLeastOnce())
             ->method('has')
             ->willReturn(true);
 
-        $this->containerMock->expects($this->atLeastOnce())
+        $this->containerMock->expects(static::atLeastOnce())
             ->method('get')
             ->willReturn($this->moneyPluginMock, $this->configMock);
 
-        $this->assertInstanceOf(
+        static::assertInstanceOf(
             EnhancedEcommerceDataLayerExpanderInterface::class,
             $this->factory->createProductDataLayerExpander()
         );
@@ -75,16 +75,16 @@ class EnhancedEcommerceProductConnectorFactoryTest extends Unit
      */
     public function testGetMoneyPlugin(): void
     {
-        $this->containerMock->expects($this->atLeastOnce())
+        $this->containerMock->expects(static::atLeastOnce())
             ->method('has')
             ->willReturn(true);
 
-        $this->containerMock->expects($this->atLeastOnce())
+        $this->containerMock->expects(static::atLeastOnce())
             ->method('get')
             ->willReturn($this->moneyPluginMock);
 
-        $this->assertInstanceOf(
-            MoneyPluginInterface::class,
+        static::assertEquals(
+            $this->moneyPluginMock,
             $this->factory->getMoneyPlugin()
         );
     }
