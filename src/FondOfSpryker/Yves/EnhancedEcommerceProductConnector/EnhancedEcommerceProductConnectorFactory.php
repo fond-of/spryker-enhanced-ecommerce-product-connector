@@ -2,8 +2,8 @@
 
 namespace FondOfSpryker\Yves\EnhancedEcommerceProductConnector;
 
-use FondOfSpryker\Yves\EnhancedEcommerceExtension\Dependency\EnhancedEcommerceDataLayerExpanderInterface;
-use FondOfSpryker\Yves\EnhancedEcommerceProductConnector\Expander\ProductDataLayerExpander;
+use FondOfSpryker\Yves\EnhancedEcommerceExtension\Dependency\EnhancedEcommerceRendererInterface;
+use FondOfSpryker\Yves\EnhancedEcommerceProductConnector\Renderer\ProductDetailRenderer;
 use Spryker\Shared\Money\Dependency\Plugin\MoneyPluginInterface;
 use Spryker\Yves\Kernel\AbstractFactory;
 
@@ -13,11 +13,11 @@ use Spryker\Yves\Kernel\AbstractFactory;
 class EnhancedEcommerceProductConnectorFactory extends AbstractFactory
 {
     /**
-     * @return \FondOfSpryker\Yves\EnhancedEcommerceExtension\Dependency\EnhancedEcommerceDataLayerExpanderInterface
+     * @return \FondOfSpryker\Yves\EnhancedEcommerceExtension\Dependency\EnhancedEcommerceRendererInterface
      */
-    public function createProductDataLayerExpander(): EnhancedEcommerceDataLayerExpanderInterface
+    public function createProductDetailRenderer(): EnhancedEcommerceRendererInterface
     {
-        return new ProductDataLayerExpander($this->getMoneyPlugin(), $this->getConfig());
+        return new ProductDetailRenderer($this->getMoneyPlugin(), $this->getConfig());
     }
 
     /**

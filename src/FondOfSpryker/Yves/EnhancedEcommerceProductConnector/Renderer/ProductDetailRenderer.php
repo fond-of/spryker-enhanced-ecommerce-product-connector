@@ -1,17 +1,17 @@
 <?php
 
-namespace FondOfSpryker\Yves\EnhancedEcommerceProductConnector\Expander;
+namespace FondOfSpryker\Yves\EnhancedEcommerceProductConnector\Renderer;
 
 use FondOfSpryker\Shared\EnhancedEcommerceProductConnector\EnhancedEcommerceProductConnectorConstants as ModuleConstants;
-use FondOfSpryker\Yves\EnhancedEcommerceExtension\Dependency\EnhancedEcommerceDataLayerExpanderInterface;
+use FondOfSpryker\Yves\EnhancedEcommerceExtension\Dependency\EnhancedEcommerceRendererInterface;
 use FondOfSpryker\Yves\EnhancedEcommerceProductConnector\EnhancedEcommerceProductConnectorConfig;
-use Generated\Shared\Transfer\EnhancedEcommerceDetailTransfer;
 use Generated\Shared\Transfer\EnhancedEcommerceProductTransfer;
 use Generated\Shared\Transfer\EnhancedEcommerceTransfer;
 use Generated\Shared\Transfer\ProductViewTransfer;
 use Spryker\Shared\Money\Dependency\Plugin\MoneyPluginInterface;
+use Twig\Environment;
 
-class ProductDataLayerExpander implements EnhancedEcommerceDataLayerExpanderInterface
+class ProductDetailRenderer implements EnhancedEcommerceRendererInterface
 {
     /**
      * @var \Spryker\Shared\Money\Dependency\Plugin\MoneyPluginInterface
@@ -36,33 +36,33 @@ class ProductDataLayerExpander implements EnhancedEcommerceDataLayerExpanderInte
     }
 
     /**
+     * @param \Twig\Environment $twig
      * @param string $page
      * @param array $twigVariableBag
-     * @param array $dataLayer
      *
-     * @return array
+     * @return string
      */
-    public function expand(string $page, array $twigVariableBag, array $dataLayer): array
+    public function render(Environment $twig, string $page, array $twigVariableBag): string
     {
         $enhancedEcommerceTransfer = (new EnhancedEcommerceTransfer())
             ->setEvent(ModuleConstants::EVENT_NAME)
             ->setEventCategory(ModuleConstants::EVENT_CATEGORY)
             ->setEventAction($page)
             ->setEventLabel($twigVariableBag[ModuleConstants::PARAM_PRODUCT]->getSku())
-            ->setEcommerce(['detail' => $this->addDetail($twigVariableBag)->toArray(true, true)]);
+            ->setEcommerceName('detail')
+            ->addProduct($this->getProduct($twigVariableBag[ModuleConstants::PARAM_PRODUCT]));
 
-        return $this->removeEmptyArrayIndex($enhancedEcommerceTransfer->toArray(true, true));
+        return $twig->render($this->getTemplate(), [
+            'data' => $enhancedEcommerceTransfer->toArray(true, true),
+        ]);
     }
 
     /**
-     * @param array $twigVariableBag
+     * @return string
      */
-    protected function addDetail(array $twigVariableBag): EnhancedEcommerceDetailTransfer
+    public function getTemplate(): string
     {
-        $enhancedEcommerceDetailTransfer = new EnhancedEcommerceDetailTransfer();
-        $enhancedEcommerceDetailTransfer->addProduct($this->getProduct($twigVariableBag[ModuleConstants::PARAM_PRODUCT]));
-
-        return $enhancedEcommerceDetailTransfer;
+        return '@EnhancedEcommerceProductConnector/partials/product-detail.js.twig';
     }
 
     /**
@@ -72,15 +72,13 @@ class ProductDataLayerExpander implements EnhancedEcommerceDataLayerExpanderInte
      */
     protected function getProduct(ProductViewTransfer $productViewTransfer): EnhancedEcommerceProductTransfer
     {
-        $enhancedEcommerceProductTranfer = (new EnhancedEcommerceProductTransfer())
+        return (new EnhancedEcommerceProductTransfer())
             ->setId($productViewTransfer->getSku())
             ->setName($this->getProductName($productViewTransfer))
             ->setVariant($this->getProductAttrStyle($productViewTransfer))
             ->setBrand($this->getBrand($productViewTransfer))
             ->setDimension10($this->getSize($productViewTransfer))
             ->setPrice('' . $this->moneyPlugin->convertIntegerToDecimal($productViewTransfer->getPrice()) . '');
-
-        return $enhancedEcommerceProductTranfer;
     }
 
     /**
@@ -173,25 +171,5 @@ class ProductDataLayerExpander implements EnhancedEcommerceDataLayerExpanderInte
         }
 
         return '';
-    }
-
-    /**
-     * @param array $haystack
-     *
-     * @return array
-     */
-    protected function removeEmptyArrayIndex(array $haystack): array
-    {
-        foreach ($haystack as $key => $value) {
-            if (is_array($value)) {
-                $haystack[$key] = $this->removeEmptyArrayIndex($haystack[$key]);
-            }
-
-            if (!$value && !in_array($key, $this->config->getDontUnsetArrayIndex())) {
-                unset($haystack[$key]);
-            }
-        }
-
-        return $haystack;
     }
 }

@@ -1,0 +1,28 @@
+window.dataLayer = window.dataLayer || [];
+
+var datalayer = {
+    "event": "{{ data.event }}",
+    "eventCategory": "{{ data.eventCategory }}",
+    "eventAction": "productDetail",
+    "eventLabel": "{{ data.eventLabel }}",
+    "ecommerce": {
+        "{{ data.ecommerceName }}": {
+            "actionField": [],
+            "products":[
+            {% for product in data.products %}
+                {
+                    "id": "{{ product.id }}",
+                    "name": "{{ product.name }}",
+                    "variant": "{{ product.variant }}",
+                    "brand": "{{ product.brand }}",
+                    "dimension10": "{{ product.dimension10 }}",
+                    "price": "{{ product.price }}"
+                }
+            {% endfor %}
+            ]
+        }
+    }
+}
+
+window.dataLayer.push(datalayer);
+

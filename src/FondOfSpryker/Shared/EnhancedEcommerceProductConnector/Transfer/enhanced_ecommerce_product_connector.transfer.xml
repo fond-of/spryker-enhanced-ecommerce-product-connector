@@ -9,6 +9,8 @@
         <property name="eventAction" type="string"/>
         <property name="eventLabel" type="string"/>
         <property name="ecommerce" type="array"/>
+        <property name="ecommerceName" type="string"/>
+        <property name="products" singular="product" type="EnhancedEcommerceProduct[]"/>
     </transfer>
 
     <transfer name="EnhancedEcommerceDetail">
