@@ -1,23 +1,23 @@
 window.dataLayer = window.dataLayer || [];
 
 var datalayer = {
-    "event": "{{ data.event }}",
-    "eventCategory": "{{ data.eventCategory }}",
-    "eventAction": "productDetail",
-    "eventLabel": "{{ data.eventLabel }}",
-    "ecommerce": {
-        "{{ data.ecommerceName }}": {
-            "actionField": [],
-            "products":[
+    'event': '{{ data.event }}',
+    'eventCategory': '{{ data.eventCategory }}',
+    'eventAction': 'productDetail',
+    'eventLabel': '{{ data.eventLabel }}',
+    'ecommerce': {
+        '{{ data.ecommerceName }}': {
+            'actionField': [],
+            'products':[
             {% for product in data.products %}
                 {
-                    "id": "{{ product.id }}",
-                    "name": "{{ product.name }}",
-                    "variant": "{{ product.variant }}",
-                    "brand": "{{ product.brand }}",
-                    "dimension10": "{{ product.dimension10 }}",
-                    "price": "{{ product.price }}"
-                }
+                    'id': '{{ product.id }}',
+                    'name': '{{ product.name }}',
+                    'variant': '{{ product.variant }}',
+                    'brand': '{{ product.brand }}',
+                    'dimension10': '{{ product.dimension10 }}',
+                    'price': '{{ product.price }}'
+                }{% if loop.last != true %},{% endif %}
             {% endfor %}
             ]
         }
@@ -25,4 +25,24 @@ var datalayer = {
 }
 
 window.dataLayer.push(datalayer);
+
+dataLayer.push({ ecommerce: null });
+dataLayer.push({
+    event: 'view_item',
+    ecommerce: {
+        items: [
+                {% for product in data.products %}
+                {
+                    item_name: '{{ product.name }}',
+                    item_id: '{{ product.id }}',
+                    price: '{{ product.price }}',
+                    item_brand: '{{ product.brand }}',
+                    item_variant: '{{ product.variant }}'
+                }{% if loop.last != true %},{% endif %}
+            {% endfor %}
+        ]
+    }
+});
+
+
 

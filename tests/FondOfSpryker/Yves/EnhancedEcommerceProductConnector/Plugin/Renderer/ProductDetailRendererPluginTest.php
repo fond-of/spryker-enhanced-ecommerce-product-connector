@@ -69,7 +69,8 @@ class ProductDetailRendererPluginTest extends Unit
     public function testIsApplicableSuccess(): void
     {
         static::assertEquals(true, $this->plugin->isApplicable(
-            EnhancedEcommerceProductConnectorConstants::PAGE_TYPE, [
+            EnhancedEcommerceProductConnectorConstants::PAGE_TYPE,
+            [
                 EnhancedEcommerceProductConnectorConstants::PARAM_PRODUCT => $this->productViewTransferMock,
             ]
         ));
@@ -81,7 +82,8 @@ class ProductDetailRendererPluginTest extends Unit
     public function testIsApplicableFailed(): void
     {
         static::assertEquals(false, $this->plugin->isApplicable(
-            EnhancedEcommerceProductConnectorConstants::PAGE_TYPE, [
+            EnhancedEcommerceProductConnectorConstants::PAGE_TYPE,
+            [
                 EnhancedEcommerceProductConnectorConstants::PARAM_PRODUCT => null,
             ]
         ));
