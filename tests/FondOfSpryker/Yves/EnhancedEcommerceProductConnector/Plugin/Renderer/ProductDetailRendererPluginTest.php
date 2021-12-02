@@ -92,7 +92,7 @@ class ProductDetailRendererPluginTest extends Unit
     /**
      * @return void
      */
-    public function testExpand(): void
+    public function testRender(): void
     {
         $this->factoryMock->expects(static::atLeastOnce())
             ->method('createProductDetailRenderer')
@@ -106,5 +106,14 @@ class ProductDetailRendererPluginTest extends Unit
                 [EnhancedEcommerceProductConnectorConstants::PARAM_PRODUCT => $this->productViewTransferMock]
             )
             ->willReturn('string');
+
+        $response = $this->plugin->render(
+            $this->twigMock,
+            EnhancedEcommerceProductConnectorConstants::PAGE_TYPE,
+            [EnhancedEcommerceProductConnectorConstants::PARAM_PRODUCT => $this->productViewTransferMock]
+        );
+
+        static::assertIsString($response);
+        static::assertEquals('string', $response);
     }
 }

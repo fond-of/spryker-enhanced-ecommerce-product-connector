@@ -24,7 +24,7 @@ class ProductDetailRenderer implements EnhancedEcommerceRendererInterface
     protected $config;
 
     /**
-     * @param \Spryker\Shared\Money\Dependency\Plugin\MoneyPluginInterface $moneyPlugin
+     * @param \Spryker\Shared\Money\Dependency\Plugin\MoneyPluginInterface                                  $moneyPlugin
      * @param \FondOfSpryker\Yves\EnhancedEcommerceProductConnector\EnhancedEcommerceProductConnectorConfig $config
      */
     public function __construct(
@@ -37,8 +37,8 @@ class ProductDetailRenderer implements EnhancedEcommerceRendererInterface
 
     /**
      * @param \Twig\Environment $twig
-     * @param string $page
-     * @param array $twigVariableBag
+     * @param string            $page
+     * @param array             $twigVariableBag
      *
      * @return string
      */
@@ -52,9 +52,11 @@ class ProductDetailRenderer implements EnhancedEcommerceRendererInterface
             ->setEcommerceName('detail')
             ->addProduct($this->getProduct($twigVariableBag[ModuleConstants::PARAM_PRODUCT]));
 
-        return $twig->render($this->getTemplate(), [
+        return $twig->render(
+            $this->getTemplate(), [
             'data' => $enhancedEcommerceTransfer->toArray(true, true),
-        ]);
+            ]
+        );
     }
 
     /**

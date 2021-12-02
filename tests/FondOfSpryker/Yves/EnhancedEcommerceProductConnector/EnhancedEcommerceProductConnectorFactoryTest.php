@@ -3,7 +3,6 @@
 namespace FondOfSpryker\Yves\EnhancedEcommerceProductConnector;
 
 use Codeception\Test\Unit;
-use FondOfSpryker\Yves\EnhancedEcommerceExtension\Dependency\EnhancedEcommerceDataLayerExpanderInterface;
 use Spryker\Shared\Money\Dependency\Plugin\MoneyPluginInterface;
 use Spryker\Yves\Kernel\Container;
 
@@ -54,7 +53,7 @@ class EnhancedEcommerceProductConnectorFactoryTest extends Unit
     /**
      * @return void
      */
-    public function testCreateDataLayerExpander(): void
+    public function testCreateProductDetailRenderer(): void
     {
         $this->containerMock->expects(static::atLeastOnce())
             ->method('has')
@@ -64,10 +63,7 @@ class EnhancedEcommerceProductConnectorFactoryTest extends Unit
             ->method('get')
             ->willReturn($this->moneyPluginMock, $this->configMock);
 
-        static::assertInstanceOf(
-            EnhancedEcommerceDataLayerExpanderInterface::class,
-            $this->factory->createProductDataLayerExpander()
-        );
+        $this->factory->createProductDetailRenderer();
     }
 
     /**
