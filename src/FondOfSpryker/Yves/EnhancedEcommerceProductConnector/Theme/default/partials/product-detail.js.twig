@@ -38,7 +38,8 @@ dataLayer.push({
                     item_id: '{{ product.id }}',
                     price: '{{ product.price }}',
                     item_brand: '{{ product.brand }}',
-                    item_variant: '{{ product.variant }}'
+                    item_variant: '{{ product.variant }}',
+                    dimension10: '{{ product.dimension10 }}'
                 }{% if loop.last != true %},{% endif %}
             {% endfor %}
         ]
