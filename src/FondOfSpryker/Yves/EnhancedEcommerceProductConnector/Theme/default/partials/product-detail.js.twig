@@ -1,16 +1,15 @@
 {% spaceless %}
-window.dataLayer = window.dataLayer || [];
 
 var datalayer = {
-    'event': '{{ data.event }}',
-    'eventCategory': '{{ data.eventCategory }}',
+    'event': '{{ enhancedEcommece.event }}',
+    'eventCategory': '{{ enhancedEcommece.eventCategory }}',
     'eventAction': 'productDetail',
-    'eventLabel': '{{ data.eventLabel }}',
+    'eventLabel': '{{ enhancedEcommece.eventLabel }}',
     'ecommerce': {
-        '{{ data.ecommerceName }}': {
+        '{{ enhancedEcommece.ecommerceName }}': {
             'actionField': [],
             'products':[
-            {% for product in data.products %}
+            {% for product in enhancedEcommece.products %}
                 {
                     'id': '{{ product.id }}',
                     'name': '{{ product.name }}',
@@ -25,14 +24,11 @@ var datalayer = {
     }
 }
 
-window.dataLayer.push(datalayer);
-
-dataLayer.push({ ecommerce: null });
-dataLayer.push({
+var datalayerGA4 = {
     event: 'view_item',
     ecommerce: {
         items: [
-                {% for product in data.products %}
+                {% for product in enhancedEcommece.products %}
                 {
                     item_name: '{{ product.name }}',
                     item_id: '{{ product.id }}',
@@ -44,7 +40,12 @@ dataLayer.push({
             {% endfor %}
         ]
     }
-});
+};
+
+window.dataLayer = window.dataLayer || [];
+window.dataLayer.push(datalayer);
+window.dataLayer.push({ ecommerce: null });
+window.dataLayer.push(datalayerGA4);
 {% endspaceless %}
 
 

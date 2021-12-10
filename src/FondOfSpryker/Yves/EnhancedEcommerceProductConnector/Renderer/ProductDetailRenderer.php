@@ -52,11 +52,9 @@ class ProductDetailRenderer implements EnhancedEcommerceRendererInterface
             ->setEcommerceName('detail')
             ->addProduct($this->getProduct($twigVariableBag[ModuleConstants::PARAM_PRODUCT]));
 
-        return $twig->render(
-            $this->getTemplate(), [
-            'data' => $enhancedEcommerceTransfer->toArray(true, true),
-            ]
-        );
+        return $twig->render($this->getTemplate(), [
+            'enhancedEcommece' => $enhancedEcommerceTransfer->toArray(true, true),
+        ]);
     }
 
     /**
