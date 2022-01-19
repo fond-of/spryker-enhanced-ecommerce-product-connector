@@ -16,7 +16,8 @@ class EnhancedEcommerceProductConnectorConfig extends AbstractBundleConfig
     public function getDontUnsetArrayIndex(): array
     {
         return $this->get(
-            EnhancedEcommerceProductConnectorConstants::CONFIG_DONT_UNSET_ARRAY_INDEX, [
+            EnhancedEcommerceProductConnectorConstants::CONFIG_DONT_UNSET_ARRAY_INDEX,
+            [
             EnhancedEcommerceDetailTransfer::ACTION_FIELD,
             ]
         );

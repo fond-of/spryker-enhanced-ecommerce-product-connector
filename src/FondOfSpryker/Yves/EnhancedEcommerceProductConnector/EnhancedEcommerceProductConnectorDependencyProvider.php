@@ -30,7 +30,8 @@ class EnhancedEcommerceProductConnectorDependencyProvider extends AbstractBundle
     protected function addMoneyPlugin(Container $container): Container
     {
         $container->set(
-            static::PLUGIN_MONEY, static function () {
+            static::PLUGIN_MONEY,
+            static function () {
                 return new MoneyPlugin();
             }
         );

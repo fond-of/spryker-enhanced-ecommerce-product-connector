@@ -15,7 +15,7 @@ class ProductDetailRendererPlugin extends AbstractPlugin implements EnhancedEcom
 {
     /**
      * @param string $pageType
-     * @param array  $twigVariableBag
+     * @param array $twigVariableBag
      *
      * @return bool
      */
@@ -28,8 +28,8 @@ class ProductDetailRendererPlugin extends AbstractPlugin implements EnhancedEcom
 
     /**
      * @param \Twig\Environment $twig
-     * @param string            $page
-     * @param array             $twigVariableBag
+     * @param string $page
+     * @param array $twigVariableBag
      *
      * @return string
      */
