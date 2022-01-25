@@ -91,14 +91,18 @@ class ProductDetailRenderer implements EnhancedEcommerceRendererInterface
         $productAttributes = $productViewTransfer->getAttributes();
 
         if (count($productAttributes) < 1) {
-            return '';
+            return $productViewTransfer->getName();
         }
 
-        if (isset($productAttributes[ModuleConstants::PARAM_PRODUCT_ATTR_MODEL_UNTRANSLATED])) {
+        if (isset($productAttributes[ModuleConstants::PARAM_PRODUCT_ATTR_MODEL_UNTRANSLATED]) &&
+            !empty($productAttributes[ModuleConstants::PARAM_PRODUCT_ATTR_MODEL_UNTRANSLATED]))
+        {
             return $productAttributes[ModuleConstants::PARAM_PRODUCT_ATTR_MODEL_UNTRANSLATED];
         }
 
-        if (isset($productAttributes[ModuleConstants::PARAM_PRODUCT_ATTR_MODEL])) {
+        if (isset($productAttributes[ModuleConstants::PARAM_PRODUCT_ATTR_MODEL]) &&
+            !empty($productAttributes[ModuleConstants::PARAM_PRODUCT_ATTR_MODEL]))
+        {
             return $productAttributes[ModuleConstants::PARAM_PRODUCT_ATTR_MODEL];
         }
 
